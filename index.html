@@ -9,19 +9,31 @@
     <script type="module" src="main.js"></script>
   </head>
   <body>
-    <header class="header">
-      <h1>
-        <img
-          class="brand-icon"
-          src="assets/images/Arrow happy circle.png"
-          alt="Jorik Roosjen logo"
-        />
-        Jorik Roosjen
-      </h1>
-      <h2 id="subtitle"></h2>
+    <header class="header navbar">
+      <div class="navbar-left">
+        <img class="brand-icon" src="assets/images/Arrow happy circle.png" alt="Logo" />
+      </div>
+      <nav class="navbar-tabs">
+        <button id="tab-portfolio" class="navbar-tab active">Portfolio</button>
+        <button id="tab-contact" class="navbar-tab">Contact</button>
+      </nav>
+      <div class="navbar-right">
+        <div class="lang-buttons">
+          <button type="button" onclick="setLanguage('en')">
+            <img src="assets/icons/flag-gb.png" alt="English" />
+          </button>
+          <button type="button" onclick="setLanguage('nl')">
+            <img src="assets/icons/flag-nl.png" alt="Dutch" />
+          </button>
+        </div>
+      </div>
     </header>
 
     <main class="container">
+      <div class="site-title reveal-onload" id="site-title">
+        <h1 class="site-title-main">Jorik Roosjen</h1>
+        <h2 class="site-title-sub">//Junior Software Dev//</h2>
+      </div>
       <section class="section" id="section-intro">
         <h3 id="intro-title"></h3>
         <p id="intro-content"></p>
@@ -30,82 +42,31 @@
       <section class="section" id="section-skills">
         <h3 id="skills-title"></h3>
         <div class="skills-list">
-          <span class="tooltip" data-skill="C">
-            C
-            <span class="tooltiptext">
-              
-            </span>
-          </span>
-
-          <span class="tooltip" data-skill="C#">
-            C#
-            <span class="tooltiptext">
-              
-            </span>
-          </span>
-
-          <span class="tooltip" data-skill="Python">
-            Python
-            <span class="tooltiptext">
-              
-            </span>
-          </span>
-
-          <span class="tooltip" data-skill="HTML">
-            HTML
-            <span class="tooltiptext">
-              
-            </span>
-          </span>
-
-          <span class="tooltip" data-skill="CSS">
-            CSS
-            <span class="tooltiptext">
-              
-            </span>
-          </span>
-
-          <span class="tooltip" data-skill="JavaScript">
-            JavaScript
-            <span class="tooltiptext">
-              
-            </span>
-          </span>
-
-          <span class="tooltip" data-skill="Angular CLI">
-            Angular CLI
-            <span class="tooltiptext">
-              
-            </span>
-          </span>
-
-          <span class="tooltip" data-skill="Node.js & npm">
-            Node.js &amp; npm
-            <span class="tooltiptext">
-              
-            </span>
-          </span>
-
-          <span class="tooltip" data-skill="TypeScript">
-            TypeScript
-            <span class="tooltiptext">
-              
-            </span>
-          </span>
-
-          <span class="tooltip" data-skill="Jira">
-            Jira
-            <span class="tooltiptext">
-              
-            </span>
-          </span>
-
-          <span class="tooltip" data-skill="Azure DevOps">
-            Azure DevOps
-            <span class="tooltiptext">
-              
-            </span>
-          </span>
+          <div class="skills-category">
+            <h4 id="skills-category-codelanguages"></h4>
+            <span class="tooltip" data-skill="C">C<span class="tooltiptext"></span></span>
+            <span class="tooltip" data-skill="C#">C#<span class="tooltiptext"></span></span>
+            <span class="tooltip" data-skill="Python">Python<span class="tooltiptext"></span></span>
+            <span class="tooltip" data-skill="HTML">HTML<span class="tooltiptext"></span></span>
+            <span class="tooltip" data-skill="CSS">CSS<span class="tooltiptext"></span></span>
+            <span class="tooltip" data-skill="JavaScript">JavaScript<span class="tooltiptext"></span></span>
+            <span class="tooltip" data-skill="TypeScript">TypeScript<span class="tooltiptext"></span></span>
+          </div>
+          <hr class="skills-separator" />
+          <div class="skills-category">
+            <h4 id="skills-category-frameworks"></h4>
+            <span class="tooltip" data-skill="Angular CLI">Angular CLI<span class="tooltiptext"></span></span>
+            <span class="tooltip" data-skill="Svelte">Svelte<span class="tooltiptext"></span></span>
+          </div>
+          <hr class="skills-separator" />
+          <div class="skills-category">
+            <h4 id="skills-category-tools"></h4>
+            <span class="tooltip" data-skill="Node.js & npm">Node.js &amp; npm<span class="tooltiptext"></span></span>
+            <span class="tooltip" data-skill="Jira">Jira<span class="tooltiptext"></span></span>
+            <span class="tooltip" data-skill="Azure DevOps">Azure DevOps<span class="tooltiptext"></span></span>
+            <span class="tooltip" data-skill="VSCode">VSCode<span class="tooltiptext"></span></span>
+            <span class="tooltip" data-skill="Visual Studio">Visual Studio<span class="tooltiptext"></span></span>
+          </div>
         </div>
       </section>
     
@@ -132,27 +93,15 @@
         </div>
       </section>
 
-      <!-- Link buttons placed as part of page content below degrees -->
-      <div class="link-buttons">
-        <a
-          class="discord"
-          href="https://discord.com/users/694547228458614844"
-          target="_blank"
-          >Discord</a
-        >
-        <a class="gmail" href="mailto:roosjenjj@gmail.com" target="_blank">Gmail</a>
-        <a class="github" href="https://github.com/SilverWulf08" target="_blank">GitHub</a>
+      <!-- Link buttons will be shown only on Contact tab -->
+      <div class="link-buttons" id="contact-links" style="display:none;">
+        <a class="discord" href="https://discord.com/users/694547228458614844" target="_blank"><span class="btn-label">Discord</span></a>
+        <a class="gmail" href="mailto:roosjenjj@gmail.com" target="_blank"><span class="btn-label">Gmail</span></a>
+        <a class="github" href="https://github.com/SilverWulf08" target="_blank"><span class="btn-label">GitHub</span></a>
       </div>
     </main>
 
-    <div class="lang-buttons">
-      <button type="button" onclick="setLanguage('en')">
-        <img src="assets/icons/flag-gb.png" alt="English" />
-      </button>
-      <button type="button" onclick="setLanguage('nl')">
-        <img src="assets/icons/flag-nl.png" alt="Dutch" />
-      </button>
-    </div>
+    <!-- lang-buttons now in navbar -->
     <footer class="site-footer">
       <div class="copyright">© Copyright 2025 Jorik Roosjen</div>
       <a href="http://www.freepik.com" class="attribution" target="_blank" rel="noopener">Wallpaper by pikisuperstar / Freepik</a>

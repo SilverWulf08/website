@@ -1,3 +1,86 @@
+// Tab switching and swipe animation
+document.addEventListener('DOMContentLoaded', function () {
+  const tabPortfolio = document.getElementById('tab-portfolio');
+  const tabContact = document.getElementById('tab-contact');
+  const mainContainer = document.querySelector('.container');
+  const contactLinks = document.getElementById('contact-links');
+
+  function showPortfolio() {
+    tabPortfolio.classList.add('active');
+    tabContact.classList.remove('active');
+    // Animate contact buttons out to the right
+    if (contactLinks.style.display === 'flex') {
+      contactLinks.style.transition = 'transform 0.6s cubic-bezier(0.77,0,0.18,1), opacity 0.4s';
+      contactLinks.style.transform = 'translateX(100vw)';
+      contactLinks.style.opacity = '0';
+    }
+    // Animate swipe right for main container
+    mainContainer.style.transition = 'transform 0.6s cubic-bezier(0.77,0,0.18,1), opacity 0.4s';
+    mainContainer.style.transform = 'translateX(100vw)';
+    mainContainer.style.opacity = '0';
+    setTimeout(() => {
+      // Hide contact buttons and reset transform
+      contactLinks.style.display = 'none';
+      contactLinks.style.transition = 'none';
+      contactLinks.style.transform = 'translateX(0)';
+      contactLinks.style.opacity = '1';
+      // Show all main content sections after slide
+      Array.from(mainContainer.children).forEach((el) => {
+        if (!el.classList.contains('link-buttons')) {
+          el.style.display = '';
+        }
+      });
+      mainContainer.style.transition = 'none';
+      mainContainer.style.transform = 'translateX(0)';
+      mainContainer.style.opacity = '1';
+    }, 600);
+  }
+
+  function showContact() {
+    tabPortfolio.classList.remove('active');
+    tabContact.classList.add('active');
+    // Animate swipe left
+    mainContainer.style.transition = 'transform 0.6s cubic-bezier(0.77,0,0.18,1), opacity 0.4s';
+    mainContainer.style.transform = 'translateX(-100vw)';
+    mainContainer.style.opacity = '0';
+    // Show contact buttons immediately and trigger pop-in
+    contactLinks.style.display = 'flex';
+    contactLinks.style.flexDirection = 'column';
+    contactLinks.style.alignItems = 'center';
+    contactLinks.style.gap = '32px';
+    Array.from(contactLinks.children).forEach((btn) => {
+      btn.style.fontSize = '2rem';
+      btn.style.padding = '24px 48px';
+      btn.style.opacity = '0';
+      btn.style.transform = 'scale(0.7)';
+      setTimeout(() => {
+        btn.style.transition = 'opacity 0.3s, transform 0.3s';
+        btn.style.opacity = '1';
+        btn.style.transform = 'scale(1)';
+      }, 50);
+    });
+    // Hide main content after 250ms
+    setTimeout(() => {
+      Array.from(mainContainer.children).forEach((el) => {
+        if (!el.classList.contains('link-buttons')) {
+          el.style.display = 'none';
+        }
+      });
+    }, 250);
+    // Finish slide and fade in
+    setTimeout(() => {
+      mainContainer.style.transition = 'none';
+      mainContainer.style.transform = 'translateX(0)';
+      mainContainer.style.opacity = '1';
+    }, 600);
+  }
+
+  tabPortfolio.addEventListener('click', showPortfolio);
+  tabContact.addEventListener('click', showContact);
+
+  // Default to Portfolio
+  showPortfolio();
+});
 import { setText } from "./js/dom.js";
 import { updateFooterMode, scheduleFooterModeUpdate } from "./js/footer.js";
 import { setupBrandIcon } from "./js/brandIcon.js";
@@ -15,6 +98,12 @@ function setLanguage(lang) {
   setText("intro-content", sections.introduction.content);
 
   setText("skills-title", sections.skills.title);
+  // Set skills category headings
+  if (sections.skills.categories) {
+    setText("skills-category-codelanguages", sections.skills.categories.codeLanguages);
+    setText("skills-category-frameworks", sections.skills.categories.frameworks);
+    setText("skills-category-tools", sections.skills.categories.tools);
+  }
   document.querySelectorAll(".tooltip").forEach((el) => {
     const skill = el.dataset.skill;
     const tooltipText = el.querySelector(".tooltiptext");

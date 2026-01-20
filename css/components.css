@@ -1,9 +1,38 @@
+.link-buttons a .btn-label {
+  position: relative;
+  z-index: 2;
+}
+.skills-separator {
+  border: none;
+  border-top: 1px solid var(--border-color, #444);
+  margin: 8px 0 12px 0;
+  width: 100%;
+  opacity: 0.5;
+}
 /* Skills */
 .skills-list {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 10px;
+  flex-direction: column;
+}
+
+.skills-category {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.skills-category h4 {
+  min-width: 120px;
+  margin: 0 16px 0 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--text-color, #fff);
+  letter-spacing: 0.5px;
 }
 
 .tooltip {
@@ -94,8 +123,50 @@
   text-decoration: none;
   border: none;
   border-radius: 5px;
-  transition: transform var(--transition), box-shadow var(--transition),
-    background var(--transition);
+  transition: transform 0.18s cubic-bezier(0.4,0,0.2,1),
+    box-shadow 0.18s cubic-bezier(0.4,0,0.2,1),
+    background 0.22s cubic-bezier(0.4,0,0.2,1),
+    color 0.18s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  background: transparent;
+}
+
+.link-buttons a span,
+.link-buttons a svg {
+  position: relative;
+  z-index: 2;
+}
+
+.link-buttons a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: transparent;
+  opacity: 0;
+  transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+.link-buttons a.discord:hover::before {
+  background: #5865f2;
+  opacity: 1;
+}
+.link-buttons a.gmail:hover::before {
+  background: #d93025;
+  opacity: 1;
+}
+.link-buttons a.github:hover::before {
+  background: #24292e;
+  opacity: 1;
+}
+
+.link-buttons a {
+  /* Ensure text and icon are above the fade */
+  position: relative;
+  z-index: 1;
+  background: transparent;
 }
 
 .link-buttons a:hover {
@@ -104,26 +175,23 @@
 }
 
 .link-buttons a.discord:hover {
-  background: #5865f2;
+  background: none;
 }
 
 .link-buttons a.gmail:hover {
-  background: #d93025;
+  background: none;
 }
 
 .link-buttons a.github:hover {
-  background: #24292e;
+  background: none;
 }
 
-/* Language buttons (bottom-left) */
+/* Language buttons in navbar */
 .lang-buttons {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 9999;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
   font-family: var(--font-family);
 }
 

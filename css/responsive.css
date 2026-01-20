@@ -1,12 +1,25 @@
 @media (max-width: 500px) {
-  .link-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
+  .container {
+    width: 98%;
+    min-width: 0;
+    padding: 0 2vw;
   }
-  .link-buttons a {
-    width: 90%;
-    max-width: 220px;
+  .navbar-tab {
+    font-size: 0.9rem;
+    padding: 4px 10px;
+    min-width: 80px;
+    max-width: 40vw;
+    box-sizing: border-box;
+  }
+  .link-buttons.contact-active {
+    gap: 18px;
+    margin-top: 32px;
+  }
+  .link-buttons.contact-active a {
+    font-size: 1.2rem;
+    padding: 16px 8px;
+    width: 90vw;
+    max-width: 98vw;
     text-align: center;
   }
 }
@@ -16,16 +29,7 @@
     width: 90%;
   }
 
-  .lang-buttons {
-    position: static;
-    bottom: auto;
-    left: auto;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    margin: 12px 0 8px 0;
-  }
+  /* .lang-buttons: no special mobile centering, always right in navbar */
 
   .site-footer {
     align-items: center;

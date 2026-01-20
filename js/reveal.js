@@ -25,6 +25,12 @@ export function setupPageLoadAnimations() {
   // Header first
   setReveal(header, { delayMs: startDelay });
 
+  // Site title flies in from below like cards
+  const siteTitle = document.getElementById("site-title");
+  if (siteTitle) {
+    setReveal(siteTitle, { delayMs: startDelay + baseDelay });
+  }
+
   // Then the main cards, fading only
   sections.forEach((section, idx) => {
     setReveal(section, { delayMs: startDelay + (idx + 1) * baseDelay, fade: true });

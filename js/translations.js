@@ -9,18 +9,26 @@ export const translations = {
       },
       skills: {
         title: "Skills",
+        categories: {
+          codeLanguages: "Code Languages:",
+          frameworks: "Frameworks:",
+          tools: "Tools:"
+        },
         tooltips: {
           C: "Minimal experience; used only in coursework.",
           Python: "Minimal experience; used only in coursework.",
           HTML: "Used regularly at work.",
           CSS: "Used regularly at work.",
-          JavaScript: "Occasional use; mainly coursework and this site.",
+          JavaScript: "Occasional use; mainly coursework, this site and personal projects.",
           "Angular CLI": "Used regularly at work; still learning.",
           "Node.js & npm": "Used regularly at work.",
           TypeScript: "Used regularly at work; still learning.",
           Jira: "Used regularly at work.",
           "Azure DevOps": "Used regularly at work.",
+          VSCode: "Used regularly at work.",
+          "Visual Studio": "Limited experience; learning it for work.",
           "C#": "Limited experience; learning it for work.",
+          Svelte: "Used regularly at work; still learning.",
         },
       },
       experience: {
@@ -47,18 +55,26 @@ export const translations = {
       },
       skills: {
         title: "Vaardigheden",
+        categories: {
+          codeLanguages: "Programmeertalen:",
+          frameworks: "Frameworks:",
+          tools: "Tools:"
+        },
         tooltips: {
           C: "Beperkte ervaring; alleen gebruikt tijdens de opleiding.",
           Python: "Beperkte ervaring; alleen gebruikt tijdens de opleiding.",
           HTML: "Gebruik ik regelmatig op het werk.",
           CSS: "Gebruik ik regelmatig op het werk.",
-          JavaScript: "Gebruik ik af en toe; vooral opleiding en deze site.",
+          JavaScript: "Gebruik ik af en toe; vooral opleiding, deze site en persoonlijke projecten.",
           "Angular CLI": "Gebruik ik regelmatig op het werk; nog lerende.",
           "Node.js & npm": "Gebruik ik regelmatig op het werk.",
           TypeScript: "Gebruik ik regelmatig op het werk; nog lerende.",
           Jira: "Gebruik ik regelmatig op het werk.",
           "Azure DevOps": "Gebruik ik regelmatig op het werk.",
+          VSCode: "Gebruik ik regelmatig op het werk.",
+          "Visual Studio": "Beperkte ervaring; aan het leren voor werk.",
           "C#": "Beperkte ervaring; aan het leren voor werk.",
+          Svelte: "Gebruik ik regelmatig op het werk; nog lerende.",
         },
       },
       experience: {
