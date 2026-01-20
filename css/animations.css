@@ -1,0 +1,83 @@
+/* On-load reveal animations (JS assigns .reveal-onload + optional variants) */
+@keyframes reveal-float-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes reveal-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes reveal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Keep elements hidden until JS marks the page as loaded */
+body:not(.is-loaded) .reveal-onload {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0) scale(0.99);
+}
+
+body:not(.is-loaded) .reveal-onload.reveal-fade {
+  transform: none;
+}
+
+body.is-loaded .reveal-onload {
+  animation: reveal-float-in var(--reveal-duration) var(--reveal-ease) both;
+  animation-delay: var(--reveal-delay, 0ms);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+body.is-loaded .reveal-onload.reveal-pop {
+  animation-name: reveal-pop-in;
+}
+
+body.is-loaded .reveal-onload.reveal-fade {
+  animation-name: reveal-fade-in;
+}
+
+@keyframes brand-roll {
+  from {
+    transform: rotate(0deg) scale(1.15);
+  }
+  to {
+    transform: rotate(360deg) scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:not(.is-loaded) .reveal-onload {
+    opacity: 1;
+    transform: none;
+  }
+  body.is-loaded .reveal-onload {
+    animation: none;
+  }
+
+  .brand-icon.rolling {
+    animation: none;
+  }
+}

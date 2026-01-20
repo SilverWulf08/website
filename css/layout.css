@@ -1,0 +1,56 @@
+/* Brand icon next to title */
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 6px;
+  vertical-align: middle;
+  display: inline-block;
+  transform: translateZ(0);
+  transition: transform 0.2s ease, filter 0.25s ease;
+  will-change: transform;
+}
+
+/* Spin only when clicked (JS toggles this class briefly) */
+.brand-icon.rolling {
+  animation: brand-roll 1s cubic-bezier(0.42, 0, 0.58, 1) 1;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+}
+
+/* Hover pop-out without spinning */
+.brand-icon:hover {
+  transform: scale(1.12);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+}
+
+/* Layout */
+.header {
+  background: rgba(30, 30, 30, 0.35);
+  backdrop-filter: blur(8px) saturate(160%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  width: 60%;
+  margin: 20px auto;
+  flex: 1 0 auto; /* allows footer to stick to bottom on short content */
+}
+
+/* Card sections */
+.section {
+  margin-bottom: 20px;
+  background: rgba(30, 30, 30, 0.35);
+  backdrop-filter: blur(8px) saturate(160%);
+  -webkit-backdrop-filter: blur(8px) saturate(160%);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
