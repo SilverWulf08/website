@@ -1,3 +1,20 @@
+@keyframes brand-spin-lp-stop {
+  0% {
+    transform: rotate(0deg) scale(1.15);
+  }
+  100% {
+    transform: rotate(40deg) scale(1.10);
+  }
+}
+
+@keyframes brand-spin-lp {
+  0% {
+    transform: rotate(0deg) scale(1.15);
+  }
+  100% {
+    transform: rotate(360deg) scale(1.15);
+  }
+}
 /* On-load reveal animations (JS assigns .reveal-onload + optional variants) */
 @keyframes reveal-float-in {
   from {

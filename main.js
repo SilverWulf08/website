@@ -1,5 +1,11 @@
 // Password overlay logic
 document.addEventListener('DOMContentLoaded', function () {
+
+  // Set background music volume, but do not play by default
+  const bgMusic = document.getElementById('bg-music');
+  if (bgMusic) {
+    bgMusic.volume = 0.03;
+  }
   // Password is base64 encoded to deter casual inspection
   const PASSWORD = atob("SjIwMjBS");
   const overlay = document.getElementById("password-overlay");
@@ -12,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     overlay.style.display = "flex";
     passwordInput.value = "";
     passwordError.classList.remove("visible");
-    setTimeout(() => passwordInput.focus(), 100);
+    passwordInput.focus();
     // Blur the rest of the page
     document.querySelectorAll("body > :not(#password-overlay)").forEach(el => {
       el.classList.add("blurred-content");
@@ -29,6 +35,8 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("main-header").style.display = "";
     document.getElementById("main-content").style.display = "";
     document.getElementById("main-footer").style.display = "";
+    // Ensure footer is positioned correctly
+    if (typeof updateFooterMode === 'function') updateFooterMode();
     // Now run tab logic
     setupTabs();
   }

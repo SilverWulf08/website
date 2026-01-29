@@ -9,6 +9,16 @@
     <script type="module" src="main.js"></script>
   </head>
   <body>
+    <!-- Password Overlay Modal: show immediately -->
+    <div id="password-overlay" style="display:flex;">
+      <div class="password-modal section">
+        <h2>Enter Password</h2>
+        <input type="password" id="password-input" placeholder="Password" autocomplete="off" />
+        <button id="password-submit">Unlock</button>
+        <div id="password-error">Incorrect password. Try again.</div>
+      </div>
+    </div>
+
     <header class="header navbar" id="main-header" style="display:none;">
       <div class="navbar-left">
         <img class="brand-icon" src="assets/images/Arrow happy circle.png" alt="Logo" />
@@ -103,17 +113,13 @@
 
     <!-- lang-buttons now in navbar -->
     <footer class="site-footer" id="main-footer" style="display:none;">
-      <div class="copyright">© Copyright 2025 Jorik Roosjen</div>
       <a href="http://www.freepik.com" class="attribution" target="_blank" rel="noopener">Wallpaper by pikisuperstar / Freepik</a>
+      <a href="http://ncs.io/archangel" class="attribution" target="_blank" rel="noopener">
+        Music: Rameses B - Archangel (NCS Release)
+      </a>
+      <div class="copyright">© Copyright 2025 Jorik Roosjen</div>
     </footer>
-    <!-- Password Overlay Modal -->
-    <div id="password-overlay" style="display:none;">
-      <div class="password-modal section">
-        <h2>Enter Password</h2>
-        <input type="password" id="password-input" placeholder="Password" autocomplete="off" />
-        <button id="password-submit">Unlock</button>
-        <div id="password-error">Incorrect password. Try again.</div>
-      </div>
-    </div>
+    <!-- Background Music -->
+    <audio id="bg-music" src="assets/music/Rameses B - Archangel [NCS Release].mp3" loop></audio>
   </body>
 </html>
