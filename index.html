@@ -9,7 +9,7 @@
     <script type="module" src="main.js"></script>
   </head>
   <body>
-    <header class="header navbar">
+    <header class="header navbar" id="main-header" style="display:none;">
       <div class="navbar-left">
         <img class="brand-icon" src="assets/images/Arrow happy circle.png" alt="Logo" />
       </div>
@@ -29,7 +29,7 @@
       </div>
     </header>
 
-    <main class="container">
+    <main class="container" id="main-content" style="display:none;">
       <div class="site-title reveal-onload" id="site-title">
         <h1 class="site-title-main">Jorik Roosjen</h1>
         <h2 class="site-title-sub">//Junior Software Dev//</h2>
@@ -102,9 +102,18 @@
     </main>
 
     <!-- lang-buttons now in navbar -->
-    <footer class="site-footer">
+    <footer class="site-footer" id="main-footer" style="display:none;">
       <div class="copyright">© Copyright 2025 Jorik Roosjen</div>
       <a href="http://www.freepik.com" class="attribution" target="_blank" rel="noopener">Wallpaper by pikisuperstar / Freepik</a>
     </footer>
+    <!-- Password Overlay Modal -->
+    <div id="password-overlay" style="display:none;">
+      <div class="password-modal section">
+        <h2>Enter Password</h2>
+        <input type="password" id="password-input" placeholder="Password" autocomplete="off" />
+        <button id="password-submit">Unlock</button>
+        <div id="password-error">Incorrect password. Try again.</div>
+      </div>
+    </div>
   </body>
 </html>

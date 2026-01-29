@@ -1,3 +1,9 @@
+/* Restore panel/card hover effect */
+.section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
 .site-title.reveal-onload {
   /* Ensure fly-in from below, not right */
   animation: reveal-float-in var(--reveal-duration) var(--reveal-ease) both;
@@ -171,7 +177,3 @@
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}

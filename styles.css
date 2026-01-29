@@ -1,6 +1,129 @@
+
 @import url("css/variables.css");
 @import url("css/animations.css");
 @import url("css/base.css");
 @import url("css/layout.css");
 @import url("css/components.css");
 @import url("css/responsive.css");
+
+/* Password Overlay Styles */
+#password-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(20, 20, 20, 0.25);
+	backdrop-filter: blur(10px) saturate(1.5);
+}
+
+.password-modal.section {
+	background: rgba(40, 44, 52, 0.55);
+	color: var(--text-color, #fff);
+	border-radius: 18px;
+	box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+	padding: 2.5rem 2rem 2rem 2rem;
+	transition: padding-bottom 0.3s cubic-bezier(0.77,0,0.18,1);
+	min-width: 320px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	backdrop-filter: blur(16px) saturate(1.8);
+	-webkit-backdrop-filter: blur(16px) saturate(1.8);
+	border: 1.5px solid rgba(255,255,255,0.18);
+}
+
+/* Remove hover effect for password modal only */
+.password-modal.section:hover {
+	transform: none !important;
+	box-shadow: 0 8px 32px rgba(0,0,0,0.25) !important;
+}
+
+.password-modal.section.error {
+	padding-bottom: 3.2rem;
+}
+#password-error {
+	opacity: 0;
+	transform: translateY(-10px);
+	color: #e74c3c;
+	margin-top: 10px;
+	min-height: 24px;
+	transition: opacity 0.3s cubic-bezier(0.77,0,0.18,1), transform 0.3s cubic-bezier(0.77,0,0.18,1);
+	pointer-events: none;
+	position: relative;
+	width: 100%;
+	text-align: center;
+	font-size: 1rem;
+}
+
+#password-error.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+#password-input.error {
+	border: 1px solid #e74c3c !important;
+	box-shadow: 0 0 0 1px rgba(231,76,60,0.15) !important;
+	transition: border 0.2s, box-shadow 0.2s;
+	z-index: 2;
+}
+
+#password-input:focus {
+	outline: none;
+	border: 1px solid #fff;
+	box-shadow: 0 0 0 1.5px #fff;
+	z-index: 1;
+}
+
+#password-input.error:focus {
+	border: 1px solid #e74c3c !important;
+	box-shadow: 0 0 0 1.5px #e74c3c !important;
+	z-index: 2;
+}
+
+.password-modal h2 {
+	margin-bottom: 1.5rem;
+	font-size: 1.5rem;
+}
+
+#password-input {
+	padding: 0.75rem 1rem;
+	border-radius: 8px;
+	border: 1px solid #444;
+	font-size: 1.1rem;
+	margin-bottom: 1rem;
+	width: 100%;
+	background: #181818;
+	color: #fff;
+}
+
+#password-submit {
+	padding: 0.7rem 1.5rem;
+	border-radius: 8px;
+	border: none;
+	background: #18191b;
+	color: #e0e0e0;
+	font-size: 1.1rem;
+	font-weight: 600;
+	font-family: var(--font-family);
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+	transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+#password-submit:hover {
+	background: #e0e0e0;
+	color: #18191b;
+	transform: translateY(-3px);
+	box-shadow: 0 6px 16px rgba(0,0,0,0.13);
+	transition: background 0.2s, color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+.blurred-content {
+	filter: blur(10px) grayscale(0.5) brightness(0.7);
+	pointer-events: none !important;
+	user-select: none !important;
+}

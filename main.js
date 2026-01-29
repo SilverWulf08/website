@@ -1,5 +1,83 @@
-// Tab switching and swipe animation
+// Password overlay logic
 document.addEventListener('DOMContentLoaded', function () {
+  // Password is base64 encoded to deter casual inspection
+  const PASSWORD = atob("SjIwMjBS");
+  const overlay = document.getElementById("password-overlay");
+  const passwordInput = document.getElementById("password-input");
+  const passwordSubmit = document.getElementById("password-submit");
+  const passwordError = document.getElementById("password-error");
+  const mainContent = document.querySelector("body > :not(#password-overlay)");
+
+  function showOverlay() {
+    overlay.style.display = "flex";
+    passwordInput.value = "";
+    passwordError.classList.remove("visible");
+    setTimeout(() => passwordInput.focus(), 100);
+    // Blur the rest of the page
+    document.querySelectorAll("body > :not(#password-overlay)").forEach(el => {
+      el.classList.add("blurred-content");
+    });
+  }
+
+  function hideOverlay() {
+    overlay.style.display = "none";
+    // Remove blur
+    document.querySelectorAll("body > :not(#password-overlay)").forEach(el => {
+      el.classList.remove("blurred-content");
+    });
+    // Show main content, header, and footer
+    document.getElementById("main-header").style.display = "";
+    document.getElementById("main-content").style.display = "";
+    document.getElementById("main-footer").style.display = "";
+    // Now run tab logic
+    setupTabs();
+  }
+
+  function checkPassword() {
+    if (passwordInput.value === PASSWORD) {
+      // Remove error state if present
+      passwordError.classList.remove("visible");
+      passwordInput.classList.remove("error");
+      overlay.querySelector('.password-modal').classList.remove("error");
+      hideOverlay();
+    } else {
+      passwordError.classList.add("visible");
+      passwordInput.classList.add("error");
+      overlay.querySelector('.password-modal').classList.add("error");
+      passwordInput.value = "";
+      passwordInput.focus();
+    }
+  }
+
+  passwordInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      checkPassword();
+    } else {
+      // Remove error state on any key
+      passwordError.classList.remove("visible");
+      passwordInput.classList.remove("error");
+      overlay.querySelector('.password-modal').classList.remove("error");
+    }
+  });
+  passwordSubmit.addEventListener("click", checkPassword);
+
+  // Hide main content until unlocked
+  document.getElementById("main-header").style.display = "none";
+  document.getElementById("main-content").style.display = "none";
+  document.getElementById("main-footer").style.display = "none";
+  // Show overlay on load
+  showOverlay();
+
+  // Prevent tabbing out of modal
+  overlay.addEventListener("keydown", function(e) {
+    if (e.key === "Tab") {
+      e.preventDefault();
+      passwordInput.focus();
+    }
+  });
+});
+// Tab switching and swipe animation
+function setupTabs() {
   const tabPortfolio = document.getElementById('tab-portfolio');
   const tabContact = document.getElementById('tab-contact');
   const mainContainer = document.querySelector('.container');
@@ -80,7 +158,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Default to Portfolio
   showPortfolio();
-});
+}
+
+// Only run tab logic after password unlock
 import { setText } from "./js/dom.js";
 import { updateFooterMode, scheduleFooterModeUpdate } from "./js/footer.js";
 import { setupBrandIcon } from "./js/brandIcon.js";
