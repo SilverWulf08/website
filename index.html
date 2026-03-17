@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Curriculum Vitae">
+  <meta name="color-scheme" content="light dark">
+  <title>CV – Curriculum Vitae</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Skip-link voor toetsenbordgebruikers -->
+  <a href="#main-explorer" class="skip-link">Ga naar inhoud</a>
+
+  <!-- Thema-schakelaar (gloeilamp) -->
+  <button
+    class="theme-toggle"
+    id="themeToggle"
+    type="button"
+    aria-label="Wissel tussen licht en donker thema"
+    title="Wissel thema"
+  >
+    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+  </button>
+
+  <!-- Sluit alle vensters -->
+  <button
+    class="close-all-toggle"
+    id="closeAllBtn"
+    type="button"
+    aria-label="Sluit alle geopende vensters"
+    title="Sluit alle vensters"
+    hidden
+  >
+    <i class="fa-regular fa-window-restore" aria-hidden="true"></i>
+  </button>
+
+  <!-- Thema-overgang overlay -->
+  <div class="theme-transition-overlay" id="themeOverlay" aria-hidden="true"></div>
+
+  <main id="main-explorer">
+    <!-- Hoofdverkenner-venster -->
+    <section class="explorer-window main-window" role="region" aria-label="Curriculum Vitae">
+      <!-- Titelbalk -->
+      <header class="explorer-titlebar">
+        <span class="titlebar-text">Curriculum Vitae</span>
+      </header>
+
+      <!-- Adresbalk -->
+      <div class="explorer-addressbar" aria-hidden="true">
+        <i class="fa-solid fa-folder-open"></i>
+        <span class="addressbar-path">CV / Overzicht</span>
+      </div>
+
+      <!-- Inhoud -->
+      <div class="explorer-content">
+        <!-- Profiel-sectie -->
+        <div class="profile-section">
+          <div class="profile-avatar" id="profileAvatar" role="img" aria-label="Profielfoto"></div>
+          <h1 class="profile-name" id="profileName"></h1>
+          <p class="profile-intro" id="profileIntro"></p>
+        </div>
+
+        <!-- Navigatieknoppen (mappen) -->
+        <nav class="folder-grid" aria-label="CV-secties">
+          <button class="folder-btn" data-section="persoonlijk" type="button">
+            <i class="fa-solid fa-user" aria-hidden="true"></i>
+            <span>Persoonlijke Gegevens</span>
+          </button>
+          <button class="folder-btn" data-section="opleidingen" type="button">
+            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+            <span>Opleidingen</span>
+          </button>
+          <button class="folder-btn" data-section="werkervaring" type="button">
+            <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+            <span>Werkervaring</span>
+          </button>
+          <button class="folder-btn" data-section="vaardigheden" type="button">
+            <i class="fa-solid fa-wrench" aria-hidden="true"></i>
+            <span>Vaardigheden</span>
+          </button>
+          <button class="folder-btn" data-section="interesses" type="button">
+            <i class="fa-solid fa-heart" aria-hidden="true"></i>
+            <span>Interesses &amp; Meer</span>
+          </button>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Template voor sub-vensters -->
+  <template id="windowTemplate">
+    <article class="explorer-window sub-window" role="dialog" aria-modal="false" tabindex="-1">
+      <header class="explorer-titlebar draggable">
+        <span class="titlebar-text"></span>
+        <button class="window-close" type="button" aria-label="Sluit venster">
+          <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+      </header>
+      <div class="explorer-addressbar" aria-hidden="true">
+        <i class="fa-solid fa-folder-open"></i>
+        <span class="addressbar-path"></span>
+      </div>
+      <div class="explorer-content window-body"></div>
+    </article>
+  </template>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
