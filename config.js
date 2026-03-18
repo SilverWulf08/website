@@ -44,7 +44,7 @@ const CV_CONFIG = {
       functie: "Junior software developer",
       bedrijf: "LogisP Zwolle",
       periode: "2025 – 2026",
-      beschrijving: "Ik heb hier meegewerkt aan het ontwikkelen van LogisP's applicaties, waarbij ik voornamelijk kleine opdrachten en bugfixes heb uitgevoerd."
+      beschrijving: "Ik heb hier meegewerkt aan het ontwikkelen van LogisP's applicaties."
     },
     {
       functie: "Stagiair",
@@ -73,14 +73,14 @@ const CV_CONFIG = {
       "Linux",
       "Unity (minimale ervaring)",
     ],
-    programmeertalen: [
-      { naam: "HTML",        icon: "fa-brands fa-html5",     percentage: 33 },
-      { naam: "CSS",         icon: "fa-brands fa-css3-alt",  percentage: 30 },
-      { naam: "JavaScript",  icon: "fa-brands fa-js",        percentage: 28 },
-      { naam: "TypeScript",  icon: "fa-brands fa-js",        percentage: 23 },
-      { naam: "Angular",     icon: "fa-brands fa-angular",   percentage: 10 },
-      { naam: "Svelte",      icon: "fa-solid fa-code",       percentage: 5 },
-    ]
+    // programmeertalen: [
+    //   { naam: "HTML",        icon: "fa-brands fa-html5",     percentage: 33 },
+    //   { naam: "CSS",         icon: "fa-brands fa-css3-alt",  percentage: 30 },
+    //   { naam: "JavaScript",  icon: "fa-brands fa-js",        percentage: 28 },
+    //   { naam: "TypeScript",  icon: "fa-brands fa-js",        percentage: 23 },
+    //   { naam: "Angular",     icon: "fa-brands fa-angular",   percentage: 10 },
+    //   { naam: "Svelte",      icon: "fa-solid fa-code",       percentage: 5 },
+    // ]
   },
 
   /* ── Interesses & aanvullende informatie ──── */
