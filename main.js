@@ -36,7 +36,7 @@ function initProfile() {
   profileIntro.textContent = config.introductie;
 
   // Paginatitel bijwerken
-  document.title = `CV – ${naam}`;
+  document.title = naam;
 }
 
 /* ── Sectie-inhoud genereren ─────────────── */
@@ -235,6 +235,17 @@ function openWindow(sectionKey) {
   const renderer = sectionRenderers[sectionKey];
   if (!renderer) return;
 
+  const isMobile = window.innerWidth <= 600;
+
+  // Op mobiel: sluit bestaand venster eerst
+  if (isMobile && openWindows.size > 0) {
+    for (const w of openWindows) {
+      openWindows.delete(w);
+      w.remove();
+    }
+    updateCloseAllBtn();
+  }
+
   const data = renderer();
   const clone = windowTemplate.content.cloneNode(true);
   const win = clone.querySelector('.sub-window');
@@ -247,17 +258,19 @@ function openWindow(sectionKey) {
   // Aria
   win.setAttribute('aria-label', data.title);
 
-  // Willekeurige positie (binnen viewport)
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
-  const winW = Math.min(440, vw * 0.9);
-  const winH = Math.min(vh * 0.7, 500);
-  const maxX = Math.max(0, vw - winW - 20);
-  const maxY = Math.max(0, vh - winH - 20);
-  const x = Math.floor(Math.random() * maxX) + 10;
-  const y = Math.floor(Math.random() * maxY) + 10;
-  win.style.left = `${x}px`;
-  win.style.top  = `${y}px`;
+  // Positie: fullscreen op mobiel, willekeurig op desktop
+  if (!isMobile) {
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const winW = Math.min(440, vw * 0.9);
+    const winH = Math.min(vh * 0.7, 500);
+    const maxX = Math.max(0, vw - winW - 20);
+    const maxY = Math.max(0, vh - winH - 20);
+    const x = Math.floor(Math.random() * maxX) + 10;
+    const y = Math.floor(Math.random() * maxY) + 10;
+    win.style.left = `${x}px`;
+    win.style.top  = `${y}px`;
+  }
 
   // Bovenop plaatsen
   highestZ++;
@@ -276,8 +289,8 @@ function openWindow(sectionKey) {
   win.addEventListener('mousedown', () => bringToFront(win));
   win.addEventListener('touchstart', () => bringToFront(win), { passive: true });
 
-  // Slepen
-  initDrag(win);
+  // Slepen (alleen desktop)
+  if (!isMobile) initDrag(win);
 
   // Toevoegen aan DOM
   document.body.appendChild(clone);

@@ -64,6 +64,8 @@ const CV_CONFIG = {
       "verschillende sociale media platforms",
       "Teams outlook en andere Microsoft apps",
       "Audacity",
+      "Gimp",
+      "Linux",
       "Unity (minimale ervaring)",
     ],
     trainingen: [

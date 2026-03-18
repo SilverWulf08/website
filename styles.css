@@ -114,35 +114,25 @@ body {
 
 /* ── Thema-schakelaar ────────────────────── */
 .theme-toggle {
-  position: fixed;
-  top: 1.5rem;
-  right: 1.5rem;
-  z-index: 9000;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  background: var(--bg-window);
+  background: none;
+  border: none;
   color: var(--accent);
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   cursor: pointer;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-  transition: background 0.3s var(--ease), color 0.3s var(--ease),
-              border-color 0.3s var(--ease), transform 0.25s var(--ease),
-              box-shadow 0.3s var(--ease);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  transition: color 0.3s var(--ease), background 0.2s var(--ease),
+              transform 0.25s var(--ease);
 }
 .theme-toggle:hover {
-  transform: scale(1.08);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+  transform: scale(1.12);
+  background: var(--accent-soft);
 }
 .theme-toggle:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline-offset: 2px;
 }
 [data-theme="dark"] .theme-toggle {
   color: #6b6557;
@@ -695,8 +685,15 @@ body {
 /* ── Responsive ──────────────────────────── */
 @media (max-width: 600px) {
   body {
-    padding: 5rem 0.75rem 1.5rem;
-    align-items: flex-start;
+    padding: 0;
+    align-items: stretch;
+    min-height: 100dvh;
+  }
+  .main-window {
+    max-width: none;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100dvh;
   }
   .main-window .explorer-content {
     padding: 2rem 1.5rem;
@@ -716,14 +713,36 @@ body {
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
   }
+  .close-all-toggle {
+    display: none !important;
+  }
   .sub-window {
-    width: calc(100vw - 1rem);
-    max-height: 80vh;
-    left: 0.5rem !important;
+    inset: 0 !important;
+    width: 100% !important;
+    max-height: none;
+    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+    animation: mobileSlideUp 0.3s var(--ease) both;
+  }
+  .sub-window .explorer-titlebar {
+    cursor: default;
+    padding-right: 3.5rem;
+  }
+  .sub-window .window-close {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.75rem;
   }
   .sub-window .window-body {
-    max-height: calc(80vh - 80px);
+    max-height: none;
+    flex: 1;
   }
+}
+
+@keyframes mobileSlideUp {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @media (max-width: 380px) {
