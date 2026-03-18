@@ -33,6 +33,11 @@ const CV_CONFIG = {
     },
   ],
 
+  /* ── Trainingen & Cursussen ────────────────── */
+  trainingen: [
+    { naam: "Harvard CS50x: Introduction to Computer Science", jaar: "2023 - 2025", link: "https://courses.edx.org/certificates/80f920d4d8eb4264a6cf5989284e5051" },
+  ],
+
   /* ── Werkervaring ──────────────────────────── */
   werkervaring: [
     {
@@ -68,8 +73,13 @@ const CV_CONFIG = {
       "Linux",
       "Unity (minimale ervaring)",
     ],
-    trainingen: [
-      { naam: "Harvard CS50x: Introduction to Computer Science", jaar: "2023 - 2025", link: "https://courses.edx.org/certificates/80f920d4d8eb4264a6cf5989284e5051" },
+    programmeertalen: [
+      { naam: "HTML",        icon: "fa-brands fa-html5",     percentage: 33 },
+      { naam: "CSS",         icon: "fa-brands fa-css3-alt",  percentage: 30 },
+      { naam: "JavaScript",  icon: "fa-brands fa-js",        percentage: 28 },
+      { naam: "TypeScript",  icon: "fa-brands fa-js",        percentage: 23 },
+      { naam: "Angular",     icon: "fa-brands fa-angular",   percentage: 10 },
+      { naam: "Svelte",      icon: "fa-solid fa-code",       percentage: 5 },
     ]
   },
 

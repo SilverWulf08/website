@@ -71,7 +71,13 @@ const sectionRenderers = {
 
   opleidingen() {
     const wrap = document.createElement('div');
-    wrap.className = 'timeline';
+
+    // Diplomas
+    const diplomaSection = document.createElement('div');
+    diplomaSection.className = 'skills-section';
+    diplomaSection.innerHTML = `<h3><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Diploma's</h3>`;
+    const timeline = document.createElement('div');
+    timeline.className = 'timeline';
     for (const opl of config.opleidingen) {
       const div = document.createElement('div');
       div.className = 'timeline-item';
@@ -80,8 +86,33 @@ const sectionRenderers = {
         <div class="timeline-sub">${opl.instituut}</div>
         <div class="timeline-period">${opl.periode}</div>
         <p>${opl.beschrijving}</p>`;
-      wrap.appendChild(div);
+      timeline.appendChild(div);
     }
+    diplomaSection.appendChild(timeline);
+    wrap.appendChild(diplomaSection);
+
+    // Trainingen & Cursussen
+    if (config.trainingen && config.trainingen.length) {
+      const trSection = document.createElement('div');
+      trSection.className = 'skills-section';
+      trSection.innerHTML = `<h3><i class="fa-solid fa-certificate" aria-hidden="true"></i> Trainingen & Cursussen</h3>`;
+      const trList = document.createElement('ul');
+      trList.className = 'info-list';
+      trList.setAttribute('role', 'list');
+      for (const tr of config.trainingen) {
+        const li = document.createElement('li');
+        const naam = tr.link
+          ? `<a href="${tr.link}" target="_blank" rel="noopener noreferrer" class="info-value training-link">${tr.naam} <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>`
+          : `<span class="info-value">${tr.naam}</span>`;
+        li.innerHTML = `<i class="fa-solid fa-check" aria-hidden="true"></i>
+          ${naam}
+          <span class="timeline-period">${tr.jaar}</span>`;
+        trList.appendChild(li);
+      }
+      trSection.appendChild(trList);
+      wrap.appendChild(trSection);
+    }
+
     return { title: 'Opleidingen', path: 'CV / Opleidingen', content: wrap };
   },
 
@@ -103,7 +134,7 @@ const sectionRenderers = {
 
   vaardigheden() {
     const wrap = document.createElement('div');
-    const { taalbeheersing, software, trainingen } = config.vaardigheden;
+    const { taalbeheersing, software, programmeertalen } = config.vaardigheden;
 
     // Taalbeheersing
     const langSection = document.createElement('div');
@@ -132,25 +163,29 @@ const sectionRenderers = {
     swSection.appendChild(swList);
     wrap.appendChild(swSection);
 
-    // Trainingen
-    const trSection = document.createElement('div');
-    trSection.className = 'skills-section';
-    trSection.innerHTML = `<h3><i class="fa-solid fa-certificate" aria-hidden="true"></i> Trainingen & Cursussen</h3>`;
-    const trList = document.createElement('ul');
-    trList.className = 'info-list';
-    trList.setAttribute('role', 'list');
-    for (const tr of trainingen) {
-      const li = document.createElement('li');
-      const naam = tr.link
-        ? `<a href="${tr.link}" target="_blank" rel="noopener noreferrer" class="info-value training-link">${tr.naam} <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>`
-        : `<span class="info-value">${tr.naam}</span>`;
-      li.innerHTML = `<i class="fa-solid fa-check" aria-hidden="true"></i>
-        ${naam}
-        <span class="timeline-period">${tr.jaar}</span>`;
-      trList.appendChild(li);
+    // Programmeertalen
+    if (programmeertalen && programmeertalen.length) {
+      const plSection = document.createElement('div');
+      plSection.className = 'skills-section';
+      plSection.innerHTML = `<h3><i class="fa-solid fa-code" aria-hidden="true"></i> Programmeertalen</h3>`;
+      const plList = document.createElement('div');
+      plList.className = 'prog-lang-list';
+      for (const lang of programmeertalen) {
+        const item = document.createElement('div');
+        item.className = 'prog-lang-item';
+        item.innerHTML = `
+          <div class="prog-lang-label">
+            <i class="${lang.icon}" aria-hidden="true"></i>
+            <span>${lang.naam}</span>
+          </div>
+          <div class="prog-lang-bar">
+            <div class="prog-lang-fill" style="width:${Math.min(100, Math.max(0, lang.percentage))}%"></div>
+          </div>`;
+        plList.appendChild(item);
+      }
+      plSection.appendChild(plList);
+      wrap.appendChild(plSection);
     }
-    trSection.appendChild(trList);
-    wrap.appendChild(trSection);
 
     return { title: 'Vaardigheden', path: 'CV / Vaardigheden', content: wrap };
   },
@@ -327,7 +362,6 @@ function closeAllWindows() {
     win.style.setProperty('--scatter-x', `${tx}px`);
     win.style.setProperty('--scatter-y', `${ty}px`);
     win.style.setProperty('--scatter-r', `${rot}deg`);
-    win.style.animationDelay = `${i * 100}ms`;
     win.style.animation = `windowScatter 0.5s cubic-bezier(0.55,0,1,0.45) forwards`;
     win.style.animationDelay = `${i * 100}ms`;
 
@@ -347,20 +381,6 @@ function bringToFront(win) {
   highestZ++;
   win.style.zIndex = highestZ;
 }
-
-/* Sluit-animaties */
-const closeKeyframes = `
-@keyframes windowClose {
-  from { opacity: 1; transform: scale(1); }
-  to   { opacity: 0; transform: scale(0.9); }
-}
-@keyframes windowScatter {
-  0%   { opacity: 1; transform: translate(0,0) rotate(0) scale(1); }
-  100% { opacity: 0; transform: translate(var(--scatter-x),var(--scatter-y)) rotate(var(--scatter-r)) scale(0.2); }
-}`;
-const styleSheet = document.createElement('style');
-styleSheet.textContent = closeKeyframes;
-document.head.appendChild(styleSheet);
 
 /* ── Drag functionaliteit ────────────────── */
 function initDrag(win) {
@@ -446,11 +466,13 @@ function toggleTheme() {
   // Animatie starten
   themeOverlay.classList.add('active');
 
-  // Halverwege het thema wisselen
-  setTimeout(() => {
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('cv-theme', next);
-  }, 250);
+  // Halverwege het thema wisselen (frame-gesynchroniseerd)
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('cv-theme', next);
+    }, 240);
+  });
 
   // Opruimen
   themeOverlay.addEventListener('animationend', () => {
