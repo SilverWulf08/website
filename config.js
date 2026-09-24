@@ -25,15 +25,18 @@ const CV_CONFIG = {
 
   /* ── Profielschets ──────────────────────────── */
   profielschets: `Hallo, mijn naam is Jorik. Ik ben in 2004 geboren en woon op dit moment in mijn ouderlijk huis. Ik heb veel uiteenlopende passies en interesses waaronder politiek, geschiedenis, wetenschap, technologie, games, psychologie, sociale structuren en nog veel meer.
-Ik ben een zeer betrouwbaar en nauwlettend persoon die erg gericht is op nauwkeurig en zorgvuldig werk. Daarnaast beschik ik over sterke en duidelijke communicatieve vaardigheden en kritisch denkvermogen. Ik heb een diagnose voor ASS en NAH, daarom komen mijn kwaliteiten het meest tot z'n recht als mijn arbeidsvoorwaarden worden gerespecteerd.
+Ik ben een zeer betrouwbaar en nauwlettend persoon die erg gericht is op nauwkeurig en zorgvuldig werk. Daarnaast beschik ik over sterke en duidelijke communicatieve vaardigheden en kritisch denkvermogen. Ik heb een diagnose voor ASS en NAH, daarom komen mijn kwaliteiten het meest tot z'n recht als mijn arbeidsvoorwaarden worden gerespecteerd. Om deze redenen sta ik in het doelgroepregister.
+
 Hier zijn een aantal belangrijke voorwaarden die ik nodig heb om mijn werk goed uit te kunnen voeren:
 - Mogelijkheid om op een vaste dag(en) thuis te werken en incidenteel thuis te werken.
+- Niet een te lange reisafstand of complexe reisroute naar werk.
 - Werken in een rustige prikkelarme omgeving.
-- Geen hoge werkdruk (niet teveel werk op mijn bordje).
-- Maximaal 24 uur per week werken, 4 dagen in de week. 1 rustdag in de week is cruciaal.
+- Geen hoge werkdruk (niet teveel werk op mijn bord).
+- Maximaal 24 uur per week werken, 4 dagen in de week. 1 rustdag in de week is cruciaal (het liefst midden in de week).
 - Genoeg tijd om opdrachten/projecten uit te kunnen voeren.
 - Open en duidelijke communicatie.
 - Een enthousiaste en positieve werksfeer.
+
 Mijn beperkingen uiten zich het meeste in een tekort aan energie en een laag werktempo. Om deze redenen zijn deze arbeidsvoorwaarden van groot belang. Wanneer er aan deze voorwaarden wordt voldaan ben ik in staat om te werken en het beste uit mezelf te halen. Als dit niet zo is, ben ik minder productief of kan ik mijn werk helemaal niet doen.`,
 
   /* ── Opleidingen ───────────────────────────── */

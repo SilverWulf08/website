@@ -242,7 +242,11 @@ const sectionRenderers = {
       if (!paragraphBuffer.length) return;
       const paragraph = document.createElement('p');
       paragraph.className = 'profile-sketch-text';
-      paragraph.textContent = paragraphBuffer.join(' ').trim();
+      const text = paragraphBuffer.join(' ').trim();
+      paragraph.innerHTML = text.replace(
+        /doelgroepregister/gi,
+        '<a href="https://www.uwv.nl/nl/doelgroepregister" target="_blank" rel="noopener noreferrer" class="training-link">doelgroepregister <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>'
+      );
       wrap.appendChild(paragraph);
       paragraphBuffer = [];
     }
