@@ -320,6 +320,35 @@ body {
   transition: color 0.6s var(--ease);
 }
 
+.profile-sketch-link {
+  appearance: none;
+  -webkit-appearance: none;
+  all: unset;
+  display: inline-block;
+  margin: 1.15rem auto 0;
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  cursor: pointer;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: transform 0.2s var(--ease), opacity 0.2s var(--ease), filter 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.profile-sketch-link:hover,
+.profile-sketch-link:focus-visible {
+  opacity: 1;
+  color: var(--accent);
+  transform: translateY(-1px) scale(1.02);
+  filter: brightness(1.08);
+}
+
+.profile-sketch-link:focus-visible {
+  outline: none;
+}
+
 /* ── Mapknoppen ──────────────────────────── */
 .folder-grid {
   display: grid;
@@ -495,6 +524,42 @@ body {
 .info-list li.copyable:focus-visible .copy-hint {
   opacity: 0.5;
 }
+.context-action-menu {
+  position: fixed;
+  z-index: 11000;
+  min-width: 190px;
+  background: var(--bg-window);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  padding: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.context-action-item {
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease);
+}
+
+.context-action-item:hover,
+.context-action-item:focus-visible {
+  background: var(--bg-folder-hover);
+  color: var(--text);
+  outline: none;
+}
+
 .copy-toast {
   position: fixed;
   bottom: 2.5rem;
@@ -730,6 +795,39 @@ body {
   color: var(--text-muted);
   line-height: 1.8;
   white-space: pre-line;
+  transition: color 0.6s var(--ease);
+}
+
+.profile-sketch-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.profile-sketch-text {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  white-space: pre-line;
+  transition: color 0.6s var(--ease);
+  margin: 0;
+}
+
+.profile-sketch-list {
+  margin: 0.2rem 0 0;
+  padding-left: 1.3rem;
+  list-style: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.profile-sketch-list li {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
   transition: color 0.6s var(--ease);
 }
 

@@ -51,17 +51,22 @@ const sectionRenderers = {
       li.className = 'copyable';
       li.setAttribute('tabindex', '0');
       li.setAttribute('role', 'button');
-      li.setAttribute('aria-label', `Kopieer ${item.label}: ${item.waarde}`);
+      li.setAttribute('aria-label', `Opties voor ${item.label}: ${item.waarde}`);
       li.innerHTML = `
         <i class="${item.icon}" aria-hidden="true"></i>
         <span class="info-label">${item.label}</span>
         <span class="info-value">${item.waarde}</span>
         <span class="copy-hint" aria-hidden="true"><i class="fa-regular fa-copy"></i></span>`;
-      li.addEventListener('click', () => copyToClipboard(item.waarde));
+
+      li.addEventListener('click', (event) => {
+        event.stopPropagation();
+        showContextMenu(item, li);
+      });
+
       li.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          copyToClipboard(item.waarde);
+          showContextMenu(item, li);
         }
       });
       ul.appendChild(li);
@@ -134,7 +139,7 @@ const sectionRenderers = {
 
   vaardigheden() {
     const wrap = document.createElement('div');
-    const { taalbeheersing, software, programmeertalen } = config.vaardigheden;
+    const { taalbeheersing, software, kwaliteiten } = config.vaardigheden;
 
     // Taalbeheersing
     const langSection = document.createElement('div');
@@ -163,14 +168,14 @@ const sectionRenderers = {
     swSection.appendChild(swList);
     wrap.appendChild(swSection);
 
-    // Programmeertalen
-    if (programmeertalen && programmeertalen.length) {
+    // Kwaliteiten
+    if (kwaliteiten && kwaliteiten.length) {
       const plSection = document.createElement('div');
       plSection.className = 'skills-section';
-      plSection.innerHTML = `<h3><i class="fa-solid fa-code" aria-hidden="true"></i> Programmeertalen</h3>`;
+      plSection.innerHTML = `<h3><i class="fa-solid fa-star" aria-hidden="true"></i> kwaliteiten</h3>`;
       const plList = document.createElement('div');
       plList.className = 'prog-lang-list';
-      for (const lang of programmeertalen) {
+      for (const lang of kwaliteiten) {
         const item = document.createElement('div');
         item.className = 'prog-lang-item';
         item.innerHTML = `
@@ -223,11 +228,149 @@ const sectionRenderers = {
     }
 
     return { title: 'Interesses & Meer', path: 'CV / Interesses', content: wrap };
+  },
+
+  profielschets() {
+    const wrap = document.createElement('div');
+    wrap.className = 'profile-sketch-wrapper';
+
+    const lines = (config.profielschets || 'Hier komt je profielschets te staan.').split(/\n/);
+    let paragraphBuffer = [];
+    let listBuffer = [];
+
+    function flushParagraph() {
+      if (!paragraphBuffer.length) return;
+      const paragraph = document.createElement('p');
+      paragraph.className = 'profile-sketch-text';
+      paragraph.textContent = paragraphBuffer.join(' ').trim();
+      wrap.appendChild(paragraph);
+      paragraphBuffer = [];
+    }
+
+    function flushList() {
+      if (!listBuffer.length) return;
+      const list = document.createElement('ul');
+      list.className = 'profile-sketch-list';
+      for (const item of listBuffer) {
+        const li = document.createElement('li');
+        li.textContent = item.replace(/^[-•]\s*/, '').trim();
+        list.appendChild(li);
+      }
+      wrap.appendChild(list);
+      listBuffer = [];
+    }
+
+    for (const rawLine of lines) {
+      const line = rawLine.trim();
+      if (!line) {
+        flushParagraph();
+        flushList();
+        continue;
+      }
+
+      if (line.startsWith('- ')) {
+        flushParagraph();
+        listBuffer.push(line);
+        continue;
+      }
+
+      if (listBuffer.length) {
+        flushList();
+      }
+
+      paragraphBuffer.push(line);
+    }
+
+    flushParagraph();
+    flushList();
+
+    return { title: 'Profielschets', path: 'CV / Profielschets', content: wrap };
   }
 };
 
 /* ── Kopieer naar klembord ────────────────── */
 let toastTimer = null;
+
+function removeActionMenu() {
+  const existing = document.querySelector('.context-action-menu');
+  if (existing) existing.remove();
+}
+
+function openGoogleMaps(query) {
+  const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function handleItemAction(item, action) {
+  const value = item.waarde;
+
+  switch (action) {
+    case 'copy':
+      copyToClipboard(value);
+      break;
+    case 'map':
+      openGoogleMaps(value);
+      break;
+    case 'mailto':
+      window.location.href = `mailto:${value}`;
+      break;
+    case 'tel':
+      window.location.href = `tel:${value}`;
+      break;
+    default:
+      copyToClipboard(value);
+  }
+
+  removeActionMenu();
+}
+
+function getContextActions(item) {
+  const label = item.label.toLowerCase();
+  const actions = [{ label: 'Kopiëren', action: 'copy' }];
+
+  if (label.includes('e-mail') || label.includes('email')) {
+    actions.push({ label: 'E-mail openen', action: 'mailto' });
+  }
+
+  if (label.includes('telefoon') || label.includes('nummer')) {
+    actions.push({ label: 'Telefoonnummer bellen', action: 'tel' });
+  }
+
+  if (label.includes('woonplaats') || label.includes('adres') || label.includes('locatie')) {
+    actions.push({ label: 'Open in Google Maps', action: 'map' });
+  }
+
+  return actions;
+}
+
+function showContextMenu(item, trigger) {
+  removeActionMenu();
+
+  const menu = document.createElement('div');
+  menu.className = 'context-action-menu';
+
+  const actions = getContextActions(item);
+  for (const action of actions) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'context-action-item';
+    button.textContent = action.label;
+    button.addEventListener('click', () => handleItemAction(item, action.action));
+    menu.appendChild(button);
+  }
+
+  const rect = trigger.getBoundingClientRect();
+  menu.style.left = `${Math.min(window.innerWidth - 220, rect.left + 12)}px`;
+  menu.style.top = `${Math.min(window.innerHeight - menu.offsetHeight - 12, rect.bottom + 8)}px`;
+
+  document.body.appendChild(menu);
+  document.addEventListener('click', (event) => {
+    if (!menu.contains(event.target)) {
+      removeActionMenu();
+    }
+  }, { once: true });
+}
+
 function copyToClipboard(text) {
   navigator.clipboard.writeText(text).then(() => {
     showCopyToast(`"${text}" gekopieerd`);
@@ -482,7 +625,9 @@ function toggleTheme() {
 
 /* ── Mapknoppen koppelen ─────────────────── */
 function initFolderButtons() {
-  for (const btn of $$('.folder-btn')) {
+  const fileButtons = document.querySelectorAll('.folder-btn, .profile-sketch-link');
+
+  for (const btn of fileButtons) {
     btn.addEventListener('click', () => {
       openWindow(btn.dataset.section);
     });
